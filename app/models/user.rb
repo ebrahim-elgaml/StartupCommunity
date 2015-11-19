@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
     validates_presence_of :gender , :message => "gender can't be empty"
 
     has_many :startup_followers, dependent: :destroy
-  	has_many :following_startups, :through => :startup_followers
+  	has_many :following_startups, :through => :startup_followers, source: 'startup'
 
     has_many :posts,
  	:foreign_key => :user_id,

@@ -4,6 +4,6 @@ class Comment < ActiveRecord::Base
     validates_presence_of :user , :message => "should have owner"
     belongs_to :post
     validates_presence_of :post , :message => "should belong to a post"
-    belong_to :post
-    belong_to :user
+    belongs_to :post
+    belongs_to :user
 end

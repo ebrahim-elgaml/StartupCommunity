@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151113122823) do
+ActiveRecord::Schema.define(version: 20151119012225) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "text"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20151113122823) do
 
   create_table "startups", force: :cascade do |t|
     t.string   "name"
-    t.datetime "starting_data"
+    t.datetime "starting_date"
     t.float    "location_latitude"
     t.float    "location_longitude"
     t.string   "location_name"
