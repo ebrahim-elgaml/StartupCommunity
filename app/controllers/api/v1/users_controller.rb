@@ -10,7 +10,7 @@ class Api::V1::UsersController < ApplicationController
         user.profile_picture = "https://graph.facebook.com/#{user.uid}/picture?type=large" 
         user.gender = 1
         if(user.save)
-            render json: user, status: :ok
+            render json: user, status: :created
         else
             render json: user.errors.full_messages.first, status: 422
         end
