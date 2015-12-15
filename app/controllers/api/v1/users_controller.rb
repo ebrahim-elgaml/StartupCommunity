@@ -1,8 +1,8 @@
 class Api::V1::UsersController < ApplicationController
 	respond_to  :json
-	before_action :authenticate, except: [:test, :create]
+	before_action :authenticate, except: [:test, :create,:getFriends]
 	def test
-		render :json => {message: "ok"}, status: :ok		
+		render :json => {message: "ok"}, status: :success		
 	end
     def create
         user = User.new(user_params)
@@ -15,6 +15,12 @@ class Api::V1::UsersController < ApplicationController
             render json: user.errors.full_messages.first, status: 422
         end
     end
+    def getFriends
+        u = User.create(first_name: "myriadme", last_name: "aydman", email: "renadds@ggg.com", gender: true, password: Devise.friendly_token[8,20])
+        #render json: @current_user.friends, status: :ok
+        render json: User.all if stale? (User.all) 
+    end 
+	
 	protected
       def authenticate
         authenticate_token || render_unauthorized
