@@ -5,7 +5,7 @@ class Api::V1::UsersController < ApplicationController
 		render :json => {message: "ok"}, status: :ok		
 	end
     def create
-        user = User.new(first_name: params[:first_name], last_name: params[:last_name], email: params[:email], gender: params[:gender])
+        user = User.new(user_params)
         user.password = Devise.friendly_token[8,20]
         user.profile_picture = "https://graph.facebook.com/#{user.uid}/picture?type=large" 
         user.gender = 1
