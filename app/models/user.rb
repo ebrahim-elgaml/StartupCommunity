@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
 	validates_presence_of :first_name , :message => "first_name can't be empty"
     validates_presence_of :last_name , :message => "last_name can't be empty"
-    validates_presence_of :country , :message => "country can't be empty"
-    validates_presence_of :city , :message => "city can't be empty"
+    #validates_presence_of :country , :message => "country can't be empty"
+    #validates_presence_of :city , :message => "city can't be empty"
     validates_presence_of :gender , :message => "gender can't be empty"
 
     has_many :startup_followers, dependent: :destroy

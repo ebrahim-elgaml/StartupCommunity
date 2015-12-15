@@ -1,13 +1,14 @@
 class Api::V1::UsersController < ApplicationController
 	respond_to  :json
-	before_action :authenticate, except: [:test]
+	before_action :authenticate, except: [:test, :create]
 	def test
 		render :json => {message: "ok"}, status: :ok		
 	end
     def create
         user = User.new(user_params)
         user.password = Devise.friendly_token[8,20]
-        user.personal_image = "https://graph.facebook.com/#{user.uid}/picture?type=large" 
+        user.profile_picture = "https://graph.facebook.com/#{user.uid}/picture?type=large" 
+        user.gender = 1
         if(user.save)
             render json: user, status: :ok
         else
