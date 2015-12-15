@@ -6,14 +6,19 @@ class Api::V1::UsersController < ApplicationController
 	end
     def create
         user = User.new(user_params)
-        user.password = Devise.friendly_token[8,20]
-        user.profile_picture = "https://graph.facebook.com/#{user.uid}/picture?type=large" 
-        user.gender = 1
-        if(user.save)
+        if(User.exists?(email: user.email))
+            user = User.find_by(email: user.email)
             render json: user, status: :created
         else
-            render json: user.errors.full_messages.first, status: 422
+            user.password = Devise.friendly_token[8,20]
+            user.profile_picture = "https://graph.facebook.com/#{user.uid}/picture?type=large" 
+            if(user.save)
+                render json: user, status: :created
+            else
+                render json: user.errors.full_messages.first, status: 422
+            end
         end
+        
     end
 	protected
       def authenticate
@@ -32,6 +37,6 @@ class Api::V1::UsersController < ApplicationController
    private
     def user_params
         params.require(:user).
-                    permit(:first_name, :last_name, :email, :uid, :gender)
+                    permit(:first_name, :last_name, :email, :uid, :gender, :country)
     end
 end
