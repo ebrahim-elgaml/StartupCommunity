@@ -79,6 +79,18 @@ class User < ActiveRecord::Base
  	through:  :accepted_by_connection,
  	source:  'user_a'
 
+
+ 	before_create :set_auth_token
+
+ 	def set_auth_token
+      return if authentication_token.present?
+      self.authentication_token = generated_auth_token
+    end
+
+    def generated_auth_token
+      SecureRandom.uuid.gsub(/\-/,'')
+    end
+
 	def friends
 		User.where(id: (([] << self.friend_accepted) << self.accepted_by).flatten)
 	end	
