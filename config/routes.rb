@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1,default: true) do 
         get 'users/test'
-
+        post 'users/unfriend'
         get 'user/friends' => 'users#getFriends'
         get 'users/getUser/:id' => "users#getUser"
         get 'users/getFollowedStartups/:user_id' => 'users#getFollowedStartups'
