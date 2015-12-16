@@ -7,7 +7,8 @@ Rails.application.routes.draw do
         resources :users
         post 'user_connections/accept'
         post 'user_connections/reject'
-        resources :user_connections
+        get 'user_connections/index/:user_id' => 'user_connections#index'
+        resources :user_connections, except: [:index]
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
