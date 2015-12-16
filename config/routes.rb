@@ -4,13 +4,18 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1,default: true) do 
         get 'users/test'
+
         get 'user/friends' => 'users#getFriends'
         get 'users/getUser/:id' => "users#getUser"
         get 'users/getFollowedStartups/:user_id' => 'users#getFollowedStartups'
-        resources :users
+        get 'users/index/:id' => 'users#index'
         resources :posts
         get 'post/timeline' => 'posts#timeline'
-        
+        resources :users, except: [:index]
+        post 'user_connections/accept'
+        post 'user_connections/reject'
+        get 'user_connections/index/:user_id' => 'user_connections#index'
+        resources :user_connections, except: [:index]
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
