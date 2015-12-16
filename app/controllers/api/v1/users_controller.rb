@@ -38,8 +38,8 @@ class Api::V1::UsersController < ApplicationController
     end
     def getFriends
         #render json: @current_user.friends, status: :ok
-        #render json: User.find(params[:id]).friends 
-        render json: User.all
+        render json: User.find(params[:id]).friends 
+        #render json: User.all
     end 
 	def getFollowedStartups
         #render json: @current_user.friends, status: :ok
