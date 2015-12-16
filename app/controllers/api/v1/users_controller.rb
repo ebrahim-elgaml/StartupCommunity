@@ -1,14 +1,17 @@
 class Api::V1::UsersController < ApplicationController
 	respond_to  :json
-	before_action :authenticate, except: [:test, :create, :show, :index]
-    def index
+	before_action :authenticate, except: [:test, :create,:getFriends, :getUser,:getFollowedStartups,:show, :index]
+def index
         user = User.find(params[:id])
         users = User.where.not(id: user.id).where.not(id: user.friend_requests).where.not(id: user.friend_rejections).where.not(id: user.friend_accepted).where.not(id: user.request_friends).where.not(id: user.rejected_by).where.not(id: user.accepted_by)
         render json: users, status: :ok
     end
 	def test
-		render :json => {message: "ok"}, status: :ok		
+		render :json => {message: "ok"}, status: :success		
 	end
+	def getUser 
+	   render json: User.find(params[:id]) 
+	end    
     def show
         render json: User.find(params[:id]), status: :ok
     end
@@ -27,6 +30,16 @@ class Api::V1::UsersController < ApplicationController
             end
         end
     end
+    def getFriends
+        #render json: @current_user.friends, status: :ok
+        #render json: User.find(params[:id]).friends 
+        render json: User.all
+    end 
+	def getFollowedStartups
+        #render json: @current_user.friends, status: :ok
+        render json: User.find(params[:user_id]).startups 
+    end 
+	
 	protected
       def authenticate
         authenticate_token || render_unauthorized
