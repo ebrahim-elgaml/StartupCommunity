@@ -4,11 +4,11 @@ class UserConnection < ActiveRecord::Base
     # => 1 for rejected.
     # => 2 for accepted.
     enum request_status: { pending: 0, rejected: 1, accepted: 2 }
-	validates_associated :user_a
-	validates_presence_of :user_a
-	validates_associated :user_b
-	validates_presence_of :user_b
-	validates_uniqueness_of :user_a_id, scope: :user_b_id
+	# validates_associated :user_a
+	# validates_presence_of :user_a
+	# validates_associated :user_b
+	# validates_presence_of :user_b
+	# validates_uniqueness_of :user_a_id, scope: :user_b_id
 	validate :record_can_not_be_duplicate
 	def record_can_not_be_duplicate
 		if(UserConnection.exists?(user_a_id: user_b_id, user_b_id: user_b_id))
