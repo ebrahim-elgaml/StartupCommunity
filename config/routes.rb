@@ -12,6 +12,7 @@ Rails.application.routes.draw do
         get 'posts/timeline/:user_id' => 'posts#timeline'
         get 'posts/show_comments/:id' => 'posts#show_comments'
         resources :posts
+        resources :comments
         resources :users, except: [:index]
         post 'user_connections/accept'
         post 'user_connections/reject'
