@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
 	belongs_to :user , class_name: 'User' ,foreign_key: "user_id"
 	belongs_to :user_tagged , class_name: 'User' ,foreign_key: "tagged_id"
 	belongs_to :startup , class_name: 'Startup' ,foreign_key: "startup_id"
+	has_many :comments
 	validate :can_not_be_empty
 	def can_not_be_empty
 		if(text.blank? and image.blank?)

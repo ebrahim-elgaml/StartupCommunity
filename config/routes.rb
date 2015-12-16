@@ -9,8 +9,9 @@ Rails.application.routes.draw do
         get 'users/getUser/:id' => "users#getUser"
         get 'users/getFollowedStartups/:user_id' => 'users#getFollowedStartups'
         get 'users/index/:id' => 'users#index'
+        get 'posts/timeline/:user_id' => 'posts#timeline'
+        get 'posts/show_comments/:id' => 'posts#show_comments'
         resources :posts
-        get 'post/timeline' => 'posts#timeline'
         resources :users, except: [:index]
         post 'user_connections/accept'
         post 'user_connections/reject'
