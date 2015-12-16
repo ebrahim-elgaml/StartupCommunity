@@ -3,7 +3,7 @@ class Api::V1::UsersController < ApplicationController
 	before_action :authenticate, except: [:test, :create, :show, :index]
     def index
         user = User.find(params[:id])
-        users = User.where.not(id: user.friend_requests).where.not(id: user.friend_rejections).where.not(id: user.friend_accepted).where.not(id: user.request_friends).where.not(id: user.rejected_by).where.not(id: user.accepted_by)
+        users = User.where.not(id: user.id).where.not(id: user.friend_requests).where.not(id: user.friend_rejections).where.not(id: user.friend_accepted).where.not(id: user.request_friends).where.not(id: user.rejected_by).where.not(id: user.accepted_by)
         render json: users, status: :ok
     end
 	def test
