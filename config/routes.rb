@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1,default: true) do 
         get 'users/test'
-        resources :users
+        get 'users/index/:id' => 'users#index'
+        resources :users, except: [:index]
         post 'user_connections/accept'
         post 'user_connections/reject'
         get 'user_connections/index/:user_id' => 'user_connections#index'
