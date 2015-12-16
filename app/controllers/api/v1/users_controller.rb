@@ -1,9 +1,12 @@
 class Api::V1::UsersController < ApplicationController
 	respond_to  :json
-	before_action :authenticate, except: [:test, :create]
+	before_action :authenticate, except: [:test, :create, :show]
 	def test
 		render :json => {message: "ok"}, status: :ok		
 	end
+    def show
+        render json: User.find(params[:id]), status: :ok
+    end
     def create
         user = User.new(user_params)
         if(User.exists?(email: user.email))
