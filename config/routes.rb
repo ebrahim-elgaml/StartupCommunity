@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     scope module: :v1, constraints: ApiConstraints.new(version: 1,default: true) do 
         get 'users/test'
         resources :users
+        post 'user_connections/accept'
+        post 'user_connections/reject'
+        resources :user_connections
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
