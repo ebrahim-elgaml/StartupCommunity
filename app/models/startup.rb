@@ -1,8 +1,8 @@
 class Startup < ActiveRecord::Base
-	validates_presence_of :name , :message => "name can't be empty"
-  validates_presence_of :category , :message => "category can't be empty"
-  validates_presence_of :starting_date , :message => "created date can't be empty"
-  validates_associated :user 
+	 validates_presence_of :name , :message => "name can't be empty"
+  #validates_presence_of :category , :message => "category can't be empty"
+  #validates_presence_of :starting_date , :message => "created date can't be empty"
+  #validates_associated :user 
   validates_presence_of :user , :message => "must have owner"
   belongs_to :user
   validates_uniqueness_of :name

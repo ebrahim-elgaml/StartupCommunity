@@ -5,7 +5,12 @@ Rails.application.routes.draw do
     scope module: :v1, constraints: ApiConstraints.new(version: 1,default: true) do 
         get 'users/test'
         get 'user/friends' => 'users#getFriends'
+        get 'users/getUser/:id' => "users#getUser"
+        get 'users/getFollowedStartups/:user_id' => 'users#getFollowedStartups'
         resources :users
+        resources :posts
+        get 'post/timeline' => 'posts#timeline'
+        
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
